@@ -23,37 +23,27 @@ Vue.component('my-header', {
 });
 
 
-Vue.component('products', {
+Vue.component('tabla-nico', {
     template: /* html */ `    
         <div>
-            <h1 class="flex w-full justify-center items-center text-3xl p-4">{{ tabla1.title }}</h1>
-            <h1 class="flex w-full justify-center items-center text-3xl p-4">{{ tabla2.title }}</h1>
+            <h1 class="flex w-full justify-center items-center text-3xl p-4">{{ info.title }}</h1>
             <div>
                 <table class="w-full table-auto">
                     <thead class="bg-black text-white">
                         <tr>
-                            <th v-for="(head, i) of tabla1.headtable" :key="i" scope="col">{{head}}</th>
-                        </tr>
-                        <tr>
-                            <th v-for="(head, i) of tabla2.headtable" :key="i" scope="col">{{head}}</th>
+                            <th v-for="(head, i) of info.headtable" :key="i" scope="col">{{head}}</th>
                         </tr>
                     </thead>
 
                     <!-- Tabla de Productos -->
-
                     <tbody class="bg-yellow-300 text-2xl">
-                        <tr v-for="(producto, index) of tabla1.productos" :key="index">
+                        <tr v-if="info.productos" v-for="(producto, index) of info.productos" :key="index">
                             <td>{{index}}</td>
                             <td><img class="w-1/5 h-32" :src="producto.url"></td>
                             <td>{{producto.descripcion}}</td>
                             <td>{{producto.precio}}</td>
                         </tr>
-                    </tbody>
-
-                    <!-- Tabla de Usuario -->
-
-                    <tbody class="bg-yellow-300 text-2xl">
-                        <tr v-for="(usuario, index) of tabla2.usuarios" :key="index">
+                        <tr v-if="info.usuarios" v-for="(usuario, index) of info.usuarios" :key="index">
                             <td>{{index}}</td>
                             <td>{{usuario.nombre}}</td>
                             <td>{{usuario.apellido}}</td>
@@ -67,11 +57,7 @@ Vue.component('products', {
     `,
     
     props: {
-        tabla1:{
-            type: Object,
-            required: true
-        },
-        tabla2:{
+        info:{
             type: Object,
             required: true
         }
